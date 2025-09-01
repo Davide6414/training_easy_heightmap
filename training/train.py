@@ -15,7 +15,8 @@ def main(args):
     dl_train = DataLoader(ds_train, batch_size=args.batch, shuffle=True, num_workers=4, pin_memory=True)
     dl_val   = DataLoader(ds_val,   batch_size=args.batch, shuffle=False, num_workers=2, pin_memory=True)
 
-    net = SRUNet(base=args.base, depth=4).to(device)
+    # istanzia il modello senza depth
+    net = SRUNet(base=args.base).to(device)
     opt = torch.optim.AdamW(net.parameters(), lr=args.lr, weight_decay=1e-4)
     scaler = torch.cuda.amp.GradScaler(enabled=True)
 
